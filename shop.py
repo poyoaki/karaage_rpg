@@ -66,25 +66,25 @@ def shop_exit():
 
 # 店のメインルーチン
 def shop_main():
-    global shop_mode, buy_item
+    global shop_mode, buy_item, buy_max
     key = pg.key.get_pressed()
 
     if (shop_mode == 1):
         # でる
-        print('1')
+        #print('1')
         if (key[pg.K_SPACE] or key[pg.K_RETURN]):
             util.clear_text()
             # フィールド画面に戻る
             util.back_to_field()
     elif (shop_mode == 2):
-        print('2')
+        #print('2')
         # かう
         buy_item = -1
         if (key[pg.K_0]):
             util.write_text("どうしますか？")
             util.write_text(shop_txt)
             shop_mode = 0
-        if (key[pg.K_1]):
+        elif (key[pg.K_1]):
             buy_item = 0
         elif (key[pg.K_2]):
             buy_item = 1
@@ -103,14 +103,19 @@ def shop_main():
         elif (key[pg.K_9]):
             buy_item = 8
         
-        if (buy_item >= buy_max or buy_item <= 0):
-            print('p')
+        #print("%d %d" %(buy_item, buy_max))
+        if (buy_item > buy_max or buy_item < 0):
+            #print('p')
             pass
         else:
             db = data.shop_db[shop]['shouhin_db']
-            if (data.my_money >= buy_item[i]['price']):
-                data.my_money -= buy_item[i]['price']
-                util.write_text("%sは%d円です まいど！" % (i+1, buy_item[i]['name'], buy_item[i]['price']), i)
+            if (data.my_money >= buy_list[buy_item]['price']):
+                # アイテムリストに追加
+                if (data.my_item_append(buy_list[buy_item]) >= 0):
+                    data.my_money -= buy_list[buy_item]['price']
+                    util.write_text("%sは%d円です まいど！" % (buy_list[buy_item]['name'], buy_list[buy_item]['price']))
+                else:
+                    util.write_text("もちものが いっぱいだね")
             else:
                 util.write_text("お金がたりないよっ")
 
@@ -124,7 +129,7 @@ def shop_main():
             util.write_text("どうしますか？")
             util.write_text(shop_txt)
     else:
-        print('else')
+        #print('else')
         if (key[pg.K_0]):
             # 出る
             util.write_text("0:みせを でる")

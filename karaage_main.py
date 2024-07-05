@@ -20,8 +20,7 @@ pg.display.set_caption("からあげ(仮)")
 
 
 def main():
-    #write_text("うんこ")
-
+    
     while True:
 
         if (data.screen_sw == 0):

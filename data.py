@@ -192,7 +192,16 @@ my_ac = bougu_db[0]['ac']
 my_dmg_mul = buki_db[0]['dmg_mul']
 my_dmg_roll = buki_db[0]['dmg_roll']
 my_chr_name = my_chr_db[my_chr]['name']
+my_item_list = []
 
 #自分がいる場所（map上）
 my_x = 4
 my_y = 4
+
+def my_item_append(item):
+    global my_item_list
+    if (len(my_item_list) > 8):
+        return -1
+    else:
+        my_item_list.append(item)
+        return 0

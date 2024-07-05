@@ -7,9 +7,9 @@ dpath = os.path.dirname(__file__)+"/"
 clear_txt: 文字表示枠の初期化
 write_txt：1行単位で文字を描画可能
 文字サイズは42x42
-5行 27文字 が表示エリア
+6行 27文字 が表示エリア
 """
-txt_buf = ["", "", "", "", ""]
+txt_buf = ["", "", "", "", "", ""]
 txt_line = 0
 
 # テキスト欄を書く
@@ -19,34 +19,34 @@ def clear_text_box(x_offset, y_offset):
         x_offset = 0
     if (abs(y_offset) > 10):
         y_offset = 0
-    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(0,760, 1920, 320))
-    pg.draw.rect(karaage_main.screen, (255,255,255), pg.Rect(180-8+x_offset,780-8+y_offset, 1560+16, 300+16))
-    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(180,780, 1560, 300))
+    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(0,730, 1920, 320))
+    pg.draw.rect(karaage_main.screen, (255,255,255), pg.Rect(180-8+x_offset,730-8+y_offset, 1560+16, 300+16))
+    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(180,730, 1560, 300))
     pg.display.update()
 
 # テキスト欄をクリア
 def clear_text():
     global txt_line, txt_buf
     txt_line = 0
-    txt_buf = ["", "", "", "", ""]
+    txt_buf = ["", "", "", "", "", ""]
     clear_text_box(0,0)
 
 # 1行をテキスト欄に書く
 def write_text(txt):
     global txt_line, txt_buf
     font = pg.font.Font(dpath+"ipaexg.ttf", 42)
-    if (txt_line <= 4):
+    if (txt_line <= 5):
         txt_buf[txt_line] = txt
         txt_line += 1
     else:
-        for i in range(0, 4):
+        for i in range(0, 5):
             txt_buf[i] = txt_buf[i+1]
-        txt_buf[4] = txt
+        txt_buf[5] = txt
     clear_text_box(0,0)
-    for i in range(0, 5):
+    for i in range(0, 6):
         if len(txt_buf[i]) > 0:
             text = font.render(txt_buf[i], True, pg.Color("white"))
-            karaage_main.screen.blit(text, (190, 780+42*i+4*i))
+            karaage_main.screen.blit(text, (190, 750+42*i+4*i))
             pg.display.update()
 
 # テキスト欄の再描画（微妙な位置ずらしつき）
@@ -54,10 +54,10 @@ def update_write(x_offset, y_offset):
     global txt_line, txt_buf
     font = pg.font.Font(dpath+"ipaexg.ttf", 42)
     clear_text_box(x_offset, y_offset)
-    for i in range(0, 5):
+    for i in range(0, 6):
         if len(txt_buf[i]) > 0:
             text = font.render(txt_buf[i], True, pg.Color("white"))
-            karaage_main.screen.blit(text, (190+x_offset, 780+42*i+4*i+y_offset))
+            karaage_main.screen.blit(text, (190+x_offset, 750+42*i+4*i+y_offset))
             pg.display.update()
 
 # ステータス欄を書く(枠のみ、中身消去)
@@ -108,3 +108,4 @@ def map_switch_effect():
     for i in range(10):
         pg.time.Clock().tick(10)
         pg.display.update()
+

@@ -3,6 +3,7 @@
 import data
 import util
 
+
 battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
 
 """
@@ -153,7 +154,6 @@ def battle_main():
 
 
 def encount1():
-    """
     # 確率で敵と遭遇させる
     rnd = random.randint(0, 100)
     if (rnd < 10): #10%
@@ -162,8 +162,8 @@ def encount1():
         enemy = random.randint(0, data.monster_num-1)
         
         battle_start(enemy)
-    """ 
+
 
 def level_up_check():
-    print("レベルアップはまだつくってない")
+    print("level up mada dekitenai")
     pass
