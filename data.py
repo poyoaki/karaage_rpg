@@ -207,3 +207,4 @@ def my_item_append(item):
         return 0
     
 #こんにちわ
+#テストです
