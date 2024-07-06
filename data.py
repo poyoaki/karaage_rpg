@@ -205,3 +205,5 @@ def my_item_append(item):
     else:
         my_item_list.append(item)
         return 0
+    
+#こんにちわ
