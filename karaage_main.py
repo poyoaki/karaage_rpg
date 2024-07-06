@@ -6,6 +6,7 @@ import battle
 import shop
 
 #hellooooooooooooo
+#konnitiha
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
