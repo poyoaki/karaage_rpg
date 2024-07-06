@@ -154,4 +154,4 @@ def shop_main():
             util.write_text("ポリスをよぶぞ")
             util.write_text(shop_txt)
 
-
+      
