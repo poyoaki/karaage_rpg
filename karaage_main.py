@@ -5,7 +5,7 @@ import data
 import battle
 import shop
 
-
+#Testkaraage
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
@@ -157,3 +157,4 @@ def encount1():
 
 if __name__ == "__main__":
     main()
+#mete0r527
