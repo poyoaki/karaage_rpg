@@ -18,7 +18,7 @@ screen = pg.display.set_mode((screen_x, screen_y))
 
 pg.display.set_caption("からあげ(仮)")
 
-
+#qqq
 def main():
     
     while True:
