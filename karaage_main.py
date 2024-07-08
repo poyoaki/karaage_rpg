@@ -5,7 +5,7 @@ import data
 import battle
 import shop
 
-
+#please no conflict
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
