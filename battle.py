@@ -128,10 +128,24 @@ def battle_fight():
     else:
         util.write_text(battle_txt)
 
+def item():
+    util.write_text("アイテムを 選べ")
+    a = 0
+    util.clear_status_box()
+    util.write_status("0 やっぱやめ", a+7)
+
+#逃げる
 def nigeru():
+    nigeru_count = random.randint(0, 100)
+    if (nigeru_count > 20):
         util.write_text("逃げ切ることが できた")
+        battle_end = True
+        for i in range(10):
+            pg.time.Clock().tick(10)
         util.clear_text()
         util.back_to_field()
+    else:
+        util.write_text("逃げ切ることは できなかった")
 
 # 戦闘画面のメインルーチン
 def battle_main():
@@ -152,7 +166,7 @@ def battle_main():
             util.write_text("まほうはまだつくってない！")
         elif (key[pg.K_3]):
             # アイテム
-            util.write_text("アイテムはまだつくってない！")
+            item()
         elif (key[pg.K_4]):
             # にげる
             nigeru()

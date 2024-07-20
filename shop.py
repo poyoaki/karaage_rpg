@@ -1,4 +1,5 @@
 ﻿import pygame as pg, sys, time, os, random
+
 import data
 import util
 import karaage_main
