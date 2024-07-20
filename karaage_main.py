@@ -94,6 +94,8 @@ def field_main():
     #マップのロード
     map = data.field_db[data.now_field]
 
+    #https://okela.hatenadiary.org/entry/20110606/p1 を参照
+    pg.event.pump()
     moved = False
     key = pg.key.get_pressed()
 
