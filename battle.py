@@ -128,6 +128,11 @@ def battle_fight():
     else:
         util.write_text(battle_txt)
 
+def nigeru():
+        util.write_text("逃げ切ることが できた")
+        util.clear_text()
+        util.back_to_field()
+
 # 戦闘画面のメインルーチン
 def battle_main():
     global battle_end
@@ -150,7 +155,7 @@ def battle_main():
             util.write_text("アイテムはまだつくってない！")
         elif (key[pg.K_4]):
             # にげる
-            util.write_text("にげるはまだつくってない！")
+            nigeru()
 
 
 def encount1():
