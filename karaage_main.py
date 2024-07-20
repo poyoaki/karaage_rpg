@@ -96,23 +96,23 @@ def field_main():
 
     moved = False
     key = pg.key.get_pressed()
-
-    if (key[pg.K_RIGHT]):
-        if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
-            data.my_x += 1
-            moved = True
-    if (key[pg.K_LEFT]):
-        if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
-            data.my_x -= 1
-            moved = True
-    if (key[pg.K_UP]):
-        if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
-            data.my_y -= 1
-            moved = True
-    if (key[pg.K_DOWN]):
-        if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
-            data.my_y += 1
-            moved = True
+    if event.type == pg.KEYUP:
+        if (key[pg.K_RIGHT]):
+            if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
+                data.my_x += 1
+                moved = True
+        if (key[pg.K_LEFT]):
+            if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
+                data.my_x -= 1
+                moved = True
+        if (key[pg.K_UP]):
+            if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
+                data.my_y -= 1
+                moved = True
+        if (key[pg.K_DOWN]):
+            if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
+                data.my_y += 1
+                moved = True
 
     update_field()    
 
