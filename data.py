@@ -21,8 +21,10 @@ mori_img = pg.image.load(dpath+"mori.png")
 waribashi_img = pg.image.load(dpath+"waribashi.png")
 karaageya_img = pg.image.load(dpath+"karaageya.png")
 kabe_img = pg.image.load(dpath+"kabe.png")
+fork_img = pg.image.load(dpath+"fork.png")
 
-# 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title
+
+# 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
 screen_sw = 0
 
 
@@ -40,7 +42,7 @@ CITY1=10
 CITY2=11
 EXIT_CITY = 13
 KARAAGEYA = 20
-
+RIVAL = 30
 
 """フィールドの構造
 0 ... 草原
@@ -54,6 +56,8 @@ KARAAGEYA = 20
 8 ... 町1のからあげ屋
 9 ... カベ
 10 ... 町1から出る
+
+11 ... フォーク
 以下
 """
 fd_obj_db = [
@@ -67,7 +71,8 @@ fd_obj_db = [
     {'num':7, 'walk':True, 'img':sougen_img, 'event':None},    
     {'num':8, 'walk':True, 'img':karaageya_img, 'event':KARAAGEYA},    
     {'num':9, 'walk':False, 'img':kabe_img, 'event':None},    
-    {'num':10, 'walk':True, 'img':sougen_img, 'event':EXIT_CITY},    
+    {'num':10, 'walk':True, 'img':sougen_img, 'event':EXIT_CITY},
+    {'num':11, 'walk':True, 'img':fork_img, 'event':RIVAL}
 ]
 fd_objs = 6
 
@@ -86,7 +91,7 @@ fd_map = [
     [2,2,0,0,0,0,0,0,0,3,3,1,2,2,2,2,1,3,3,0,0,0,0,0,0,0,0,0,0,2,2], 
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
-    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
+    [2,2,0,0,0,0,0,0,0,0,0,0,11,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],

@@ -4,6 +4,7 @@ import util
 import data
 import battle
 import shop
+import talk
 
 #Testkaraage
 
@@ -29,7 +30,8 @@ def main():
             battle.battle_main()
         elif (data.screen_sw == 3):
             shop.shop_main()
-
+        elif (data.screen_sw == 5):
+            talk.talk_main()
         pg.display.update()
         #pg.time.Clock().tick(60)
         pg.time.Clock().tick(10)
@@ -150,6 +152,9 @@ def field_main():
                 shop.shop_start(0)
                 util.switch_to_shop()
 
+            if (event == data.RIVAL):
+                talk.talk_start()
+                util.switch_to_talk()
 
 def encount1():
     pass
