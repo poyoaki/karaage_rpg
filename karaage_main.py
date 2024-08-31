@@ -94,7 +94,6 @@ def field_main():
     #マップのロード
     map = data.field_db[data.now_field]
     pg.event.pump()
-    pg.event.pump()
     moved = False
     key = pg.key.get_pressed()
 
