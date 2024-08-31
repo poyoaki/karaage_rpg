@@ -6,7 +6,10 @@ import battle
 import shop
 import talk
 
-#Testkaraage
+
+#please no conflict
+#Mergetest
+
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
@@ -92,7 +95,7 @@ def field_main():
     global my_x_bak, my_y_bak
     #マップのロード
     map = data.field_db[data.now_field]
-
+    pg.event.pump()
     moved = False
     key = pg.key.get_pressed()
 
@@ -112,7 +115,6 @@ def field_main():
         if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
             data.my_y += 1
             moved = True
-
     update_field()    
 
     # 移動先の場所に応じてイベントを実行する
