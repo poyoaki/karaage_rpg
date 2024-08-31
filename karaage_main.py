@@ -90,27 +90,26 @@ def field_main():
     global my_x_bak, my_y_bak
     #マップのロード
     map = data.field_db[data.now_field]
-
+    pg.event.pump()
     moved = False
     key = pg.key.get_pressed()
-
-    if (key[pg.K_RIGHT]):
-        if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
-            data.my_x += 1
-            moved = True
-    if (key[pg.K_LEFT]):
-        if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
-            data.my_x -= 1
-            moved = True
-    if (key[pg.K_UP]):
-        if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
-            data.my_y -= 1
-            moved = True
-    if (key[pg.K_DOWN]):
-        if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
-            data.my_y += 1
-            moved = True
-
+    if pg.event.type == pg.keyup:
+        if (key[pg.K_RIGHT]):
+            if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
+                data.my_x += 1
+                moved = True
+        if (key[pg.K_LEFT]):
+            if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
+                data.my_x -= 1
+                moved = True
+        if (key[pg.K_UP]):
+            if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
+                data.my_y -= 1
+                moved = True
+        if (key[pg.K_DOWN]):
+            if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
+                data.my_y += 1
+                moved = True
     update_field()    
 
     # 移動先の場所に応じてイベントを実行する
