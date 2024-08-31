@@ -97,6 +97,9 @@ def switch_to_battle():
 def switch_to_shop():
     data.screen_sw = 3
 
+def switch_to_talk():
+    data.screen_sw = 5
+
 def disp_status():
     pass
 
@@ -108,4 +111,3 @@ def map_switch_effect():
     for i in range(10):
         pg.time.Clock().tick(10)
         pg.display.update()
-
