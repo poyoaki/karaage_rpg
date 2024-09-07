@@ -1,5 +1,4 @@
 ﻿import pygame as pg, sys, time, os, random
-
 import data
 import util
 import karaage_main
@@ -58,10 +57,12 @@ def shop_buy():
     util.write_status("0 やっぱやめ", i+1)
     shop_mode = 2
     util.write_text("どれを かうかい？([0]-[%d])" %(buy_max+1))
+    util.write_text(" ")
                 
 def shop_exit():
     global shop_mode
     util.write_text("また おこしください")
+    util.write_text(" ")
     shop_mode = 1
 
 # 店のメインルーチン
@@ -82,6 +83,7 @@ def shop_main():
         buy_item = -1
         if (key[pg.K_0]):
             util.write_text("どうしますか？")
+            util.write_text(" ")
             util.write_text(shop_txt)
             shop_mode = 0
         elif (key[pg.K_1]):
@@ -114,19 +116,25 @@ def shop_main():
                 if (data.my_item_append(buy_list[buy_item]) >= 0):
                     data.my_money -= buy_list[buy_item]['price']
                     util.write_text("%sは%d円です まいど！" % (buy_list[buy_item]['name'], buy_list[buy_item]['price']))
+                    util.write_text(" ")
+                    
                 else:
                     util.write_text("もちものが いっぱいだね")
+                    util.write_text(" ")
             else:
                 util.write_text("お金がたりないよっ")
+                util.write_text(" ")
 
             util.write_text("どうしますか？")
             util.write_text(shop_txt)
+            util.write_text(" ")
             shop_mode = 0
 
     elif (shop_mode == 3):
         # うる
         if (key[pg.K_0]):
             util.write_text("どうしますか？")
+            util.write_text(" ")
             util.write_text(shop_txt)
     else:
         #print('else')
