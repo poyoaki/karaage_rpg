@@ -5,6 +5,7 @@ import util
 
 
 battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
+pose = False
 
 """
 バトルのルール（仮）
@@ -149,7 +150,9 @@ def item():
     util.write_status("6", a+5)
     util.write_status("7", a+6)
     util.write_status("8", a+7)
-    util.write_status("0 やっぱやめ", a+8)
+    util.write_status("0 閉じる", a+8)
+
+
 
 #逃げる
 def nigeru():
@@ -163,9 +166,9 @@ def nigeru():
         util.clear_text()
         util.back_to_field()
     else:
-        util.write_text(" ")
         util.write_text("逃げ切ることは できなかった")
         util.write_text(" ")
+
 
 # 戦闘画面のメインルーチン
 def battle_main():
@@ -177,6 +180,7 @@ def battle_main():
             util.clear_text()
             # フィールド画面に戻る
             util.back_to_field()
+
     else:
         if (key[pg.K_1]):
             # たたかう

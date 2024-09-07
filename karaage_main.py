@@ -5,7 +5,6 @@ import battle
 import shop
 
 
-
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
 pg.init()
