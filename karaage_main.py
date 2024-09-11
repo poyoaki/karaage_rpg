@@ -4,7 +4,7 @@ import util
 import data
 import battle
 import shop
-
+import talk
 
 #please no conflict
 #Mergetest
@@ -13,9 +13,15 @@ import shop
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
 pg.init()
-
-screen_x = 1920
-screen_y = 1080
+screen_x,screen_y=-1,-1
+desktop_sizes=pg.display.get_desktop_sizes()
+# フルHDでテスト-> desktop_sizes=[(1920,1080)]
+# 　　HDでテスト-> desktop_sizes=[(1280,720)]
+is_desktop_FullHD=desktop_sizes[0][0] >= 1920 and desktop_sizes[0][1] >= 1080
+if is_desktop_FullHD:
+    screen_x, screen_y = 1920,1080
+else:
+    screen_x, screen_y = 1280,720
 #screen = pg.display.set_mode((screen_x, screen_y),pg.FULLSCREEN)
 screen = pg.display.set_mode((screen_x, screen_y))
 
@@ -32,7 +38,8 @@ def main():
             battle.battle_main()
         elif (data.screen_sw == 3):
             shop.shop_main()
-
+        elif (data.screen_sw == 5):
+            talk.talk_main()
         pg.display.update()
         #pg.time.Clock().tick(60)
         pg.time.Clock().tick(10)
@@ -79,9 +86,11 @@ def update_field():
     for i in range(0, data.map_disp_size_x, 1):
         for j in range(0, data.map_disp_size_y, 1):
             image=data.fd_obj_db[map[dispy+j][dispx+i]]['img']
-            screen.blit(image, (16+i*90, 40+j*90))
+            # screen.blit(image, (16+i*90, 40+j*90))
+            screen.blit(image, (i*90, j*90))
     #自分を描画
-    screen.blit(data.my_chr_db[data.my_chr]['img'], (16+(data.my_x-dispx)*90, 40+(data.my_y-dispy)*90))
+    # screen.blit(data.my_chr_db[data.my_chr]['img'], (16+(data.my_x-dispx)*90, 40+(data.my_y-dispy)*90))
+    screen.blit(data.my_chr_db[data.my_chr]['img'], ((data.my_x-dispx)*90, (data.my_y-dispy)*90))
 
     pg.display.update()
 
@@ -93,27 +102,26 @@ def field_main():
     global my_x_bak, my_y_bak
     #マップのロード
     map = data.field_db[data.now_field]
-
+    pg.event.pump()
     moved = False
     key = pg.key.get_pressed()
-    if event.type == pg.KEYUP:
-        if (key[pg.K_RIGHT]):
-            if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
-                data.my_x += 1
-                moved = True
-        if (key[pg.K_LEFT]):
-            if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
-                data.my_x -= 1
-                moved = True
-        if (key[pg.K_UP]):
-            if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
-                data.my_y -= 1
-                moved = True
-        if (key[pg.K_DOWN]):
-            if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
-                data.my_y += 1
-                moved = True
 
+    if (key[pg.K_RIGHT]):
+        if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
+            data.my_x += 1
+            moved = True
+    if (key[pg.K_LEFT]):
+        if (data.fd_obj_db[map[data.my_y][data.my_x-1]]['walk']):
+            data.my_x -= 1
+            moved = True
+    if (key[pg.K_UP]):
+        if (data.fd_obj_db[map[data.my_y-1][data.my_x]]['walk']):
+            data.my_y -= 1
+            moved = True
+    if (key[pg.K_DOWN]):
+        if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
+            data.my_y += 1
+            moved = True
     update_field()    
 
     # 移動先の場所に応じてイベントを実行する
@@ -153,6 +161,9 @@ def field_main():
                 shop.shop_start(0)
                 util.switch_to_shop()
 
+            if (event == data.RIVAL):
+                talk.talk_start()
+                util.switch_to_talk()
 
 def encount1():
     pass
@@ -160,3 +171,4 @@ def encount1():
 
 if __name__ == "__main__":
     main()
+#mete0r527

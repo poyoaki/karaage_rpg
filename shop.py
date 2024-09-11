@@ -2,6 +2,7 @@
 
 import data
 import util
+
 import karaage_main
 
 shop_txt = "[1]かう [2]うる [3]ごねる [4]ぬすむ [0]みせをでる"
@@ -17,12 +18,13 @@ buy_list = []
 
 # 店のキャラなどを書く
 def disp_shop_chr(shop_num):
+    gbloa=util.get_box_left_on_alignment
     if (shop_num > len(data.shop_db)):
         print("try to disp undefined shop")
         return
-        
-    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(0,300, 1920, 400))
-    karaage_main.screen.blit(data.shop_db[shop_num]['img'], (800,300))
+    pg.draw.rect(karaage_main.screen, (0,0,0), pg.Rect(util.talk_bg_left, util.talk_bg_top, util.talk_bg_width, util.talk_bg_height))
+    shop_width,shop_height = data.shop_db[shop_num]['img'].get_size()
+    karaage_main.screen.blit(data.shop_db[shop_num]['img'], (gbloa(util.screen_x,shop_width),gbloa(util.screen_y,shop_height)))
     pg.display.update()
 
 

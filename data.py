@@ -4,7 +4,17 @@ global map_size_x, map_size_y, map_elem_x, map_elem_y , fd_map, my_x, my_y, my_c
 
 
 import pygame as pg, os
+from karaage_main import is_desktop_FullHD
 
+map_disp_size_x, map_disp_size_y = 21, 11
+if is_desktop_FullHD:
+    # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
+    map_disp_size_x = 21
+    map_disp_size_y = 11
+else:
+    # 表示されるフィールドは14ｘ8のます（90x90の画像をならべる）
+    map_disp_size_x = 14
+    map_disp_size_y = 8
 
 dpath = os.path.dirname(__file__)+"/"
 #dpath = ""
@@ -21,16 +31,12 @@ mori_img = pg.image.load(dpath+"mori.png")
 waribashi_img = pg.image.load(dpath+"waribashi.png")
 karaageya_img = pg.image.load(dpath+"karaageya.png")
 kabe_img = pg.image.load(dpath+"kabe.png")
+fork_img = pg.image.load(dpath+"fork.png")
 
-# 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title
+
+
+# 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
 screen_sw = 0
-
-
-# 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
-map_disp_size_x = 21
-map_disp_size_y = 11
-
-
 
 # フィールドのイベント
 # Noneだとなにもなし(敵も出ない)
@@ -40,7 +46,7 @@ CITY1=10
 CITY2=11
 EXIT_CITY = 13
 KARAAGEYA = 20
-
+RIVAL = 30
 
 """フィールドの構造
 0 ... 草原
@@ -54,6 +60,8 @@ KARAAGEYA = 20
 8 ... 町1のからあげ屋
 9 ... カベ
 10 ... 町1から出る
+
+11 ... フォーク
 以下
 """
 fd_obj_db = [
@@ -67,7 +75,8 @@ fd_obj_db = [
     {'num':7, 'walk':True, 'img':sougen_img, 'event':None},    
     {'num':8, 'walk':True, 'img':karaageya_img, 'event':KARAAGEYA},    
     {'num':9, 'walk':False, 'img':kabe_img, 'event':None},    
-    {'num':10, 'walk':True, 'img':sougen_img, 'event':EXIT_CITY},    
+    {'num':10, 'walk':True, 'img':sougen_img, 'event':EXIT_CITY},
+    {'num':11, 'walk':True, 'img':fork_img, 'event':RIVAL}
 ]
 fd_objs = 6
 
@@ -86,7 +95,7 @@ fd_map = [
     [2,2,0,0,0,0,0,0,0,3,3,1,2,2,2,2,1,3,3,0,0,0,0,0,0,0,0,0,0,2,2], 
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
-    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
+    [2,2,0,0,0,0,0,0,0,0,0,0,11,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2],
     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
