@@ -1,15 +1,9 @@
 ﻿import pygame as pg, sys, time, os, random
-
 import util
 import data
 import battle
 import shop
 import talk
-
-
-#please no conflict
-#Mergetest
-
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
