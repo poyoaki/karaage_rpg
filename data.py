@@ -4,7 +4,17 @@ global map_size_x, map_size_y, map_elem_x, map_elem_y , fd_map, my_x, my_y, my_c
 
 
 import pygame as pg, os
+from karaage_main import is_desktop_FullHD
 
+map_disp_size_x, map_disp_size_y = 21, 11
+if is_desktop_FullHD:
+    # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
+    map_disp_size_x = 21
+    map_disp_size_y = 11
+else:
+    # 表示されるフィールドは14ｘ8のます（90x90の画像をならべる）
+    map_disp_size_x = 14
+    map_disp_size_y = 8
 
 dpath = os.path.dirname(__file__)+"/"
 #dpath = ""
@@ -27,12 +37,9 @@ fork_img = pg.image.load(dpath+"fork.png")
 # 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
 screen_sw = 0
 
-
 # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
 map_disp_size_x = 21
 map_disp_size_y = 11
-
-
 
 # フィールドのイベント
 # Noneだとなにもなし(敵も出ない)
