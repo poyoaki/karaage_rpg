@@ -5,7 +5,6 @@ import util
 
 
 battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
-pose = False
 
 """
 バトルのルール（仮）
@@ -25,6 +24,16 @@ mon_dmg_roll = 0
 mon_exp = 0
 battle_end = False
 mon_money = 0
+
+magic_flag = False
+battle_flag = True
+
+def effect():
+    for i in range(5):
+        x_offset = random.randint(-8, 8)
+        util.disp_battle_chr(mon, 0, x_offset)
+        pg.time.Clock().tick(10)
+        pg.display.update()
 
 def battle_start(monster):
     global mon, mon_name,mon_hp,mon_ac,mon_dmg_mul,mon_dmg_roll,mon_exp, battle_end, mon_money
@@ -71,6 +80,18 @@ def battle_lose():
     util.wait_for_spc_key()
     battle_end = True
     
+"""
+敵キャラの設定 ウィザードリィ風
+hp:耐久力
+ac:アーマークラス 大きいほどプレイヤーの攻撃が当たりやすいので弱い。最大20最小1
+dex:すばやさ 大きいほどすばやい。逃げやすく攻撃も当たりやすい
+dmg_mul ダメージ倍率
+dmg_roll ダメージの乱数範囲
+exp:経験値
+プレイヤーに与えるダメージはdmg_mul*乱数（1～dmg_roll)となる
+防具の堅さは未実装
+クリティカルヒットも未実装
+"""
 
 # たたかう    
 def battle_fight():
@@ -81,11 +102,14 @@ def battle_fight():
     hit = False
     damage = 0
     # ダメージ計算はDungeons&Dragons, Wizardryと同じ。適当
-    d20 = random.randrange(1,20)
-    if d20 < mon_ac:
+    bairitu = random.randrange(0,200)
+    bairitu *= 0.01
+    ransuu = random.randrange(0,100)
+
+    if ransuu > 20:
         hit = True
     if hit:
-        damage = data.my_dmg_mul*random.randrange(1,data.my_dmg_roll)
+        damage = random
         # 適当エフェクト
         for i in range(5):
             x_offset = random.randint(-8, 8)
@@ -110,6 +134,9 @@ def battle_fight():
     util.write_text(mon_name+"の攻撃")
     hit = False
     d20 = random.randrange(1,20)
+    bairitu = random.randrange(0,200)
+    bairitu *= 0.01
+    ransuu = random.randrange(0,100)
     if d20 < data.my_ac:
         hit = True
     if hit:
@@ -137,6 +164,115 @@ def battle_fight():
         util.write_text(battle_txt)
         util.write_text(" ")
 
+def magic():
+    util.write_text("[1]おがみばし [2]かみばし [3]せせりばし [4]たたきばし [5]ねぶりばし")
+    util.write_text("[6]ふりばし [7]まよいばし [8]よせばし [9]わたしばし")
+    util.write_text("[10]ちぎりばし [↓]もどる")
+    util.write_text(" ")
+
+    #無限に打てるのはバランスが崩壊するのでMP('m'ajic cho'p'sticks)制を導入予定
+    #おかん攻撃は強すぎるのでレベルアップによるMP増加では届かないMP消費量にし、特殊ルートでの使用解禁を想定
+    while True():
+        key = pg.key.get_pressed()
+        if magic_flag == True:
+            if (key[pg.K_1]):
+                kaminokibunn = random.randrange(0,100)
+                util.write_text("おがみばし 攻撃！") #これはランダム効果にしたい
+                util.write_text("わりばしは 神におがんだ")
+                if 0<=kaminokibunn<=33:
+                    util.write_text("神は 三回攻撃を避けることを 許した！")
+                elif 34 <= kaminokibunn <=66:
+                    util.write_text("神は 傷を癒やした！")
+                    
+                elif 67 <= kaminokibunn <= 99:
+                    util.write_text("神は 面倒臭がった・・・")
+            
+            elif (key[pg.K_2]):
+                util.write_text("かみばし 攻撃！")
+                util.write_text("わりばしは 相手を噛んだ")
+                mon_hp = mon_hp // 2
+                effect()
+        
+            elif (key[pg.K_3]):
+                util.write_text("せせりばし 攻撃！")
+                util.write_text("わりばしは 敵の鳩尾を つついた")
+                mon_hp -= 100
+                util.write_text("大ダメージ！")
+                for i in range(5):
+                    x_offset = random.randint(-15, 15)
+                    util.disp_battle_chr(mon, 0, x_offset)
+                    pg.time.Clock().tick(10)
+                    pg.display.update()
+                util.write_text("  人人人人人人人人人人人人人人人人人人人")
+                util.write_text("＞よい子も 悪い子も マネしないでください＜")
+                util.write_text("  Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y")
+        
+            elif (key[pg.K_4]):
+                util.write_text("たたきばし 攻撃！")
+                util.write_text("叩いた！")
+                effect()
+                mon_hp -= 25
+                util.write_text("おや...")
+                util.write_text("叩いた音で 悪霊が呼び出された！")
+                util.write_text("悪霊は" "を攻撃した！")
+                mon_hp -= 75
+                effect()
+        
+            elif (key[pg.K_5]):
+                util.write_text("ねぶりばし 攻撃！")
+                util.write_text("わりばしは " + data.my_buki_name + "を 舐めた")
+                util.write_text("敵は怖気づき 攻撃力が弱まった！")
+
+            elif (key[pg.K_6]):
+                util.write_text("ふりばし 攻撃！")
+                util.write_text("ふりだしに戻り")
+                util.write_text("この場にいる全員の傷が 無に帰った！")
+                    
+            elif (key[pg.K_7]):
+                util.write_text("まよいばし 攻撃！")
+                util.write_text("わりばしは あちらこちらへと動き回り")
+                util.write_text("敵を切り刻んだ")
+                mon_hp -= 50
+                for i in range(10):
+                    x_offset = random.randint(-3, 3)
+                    util.disp_battle_chr(mon, 0, x_offset)
+                    pg.time.Clock().tick(10)
+                    pg.display.update()
+
+            elif (key[pg.K_8]):
+                util.write_text("よせばし 攻撃！")
+                util.write_text("わりばしは" "を寄せた後")
+                util.write_text("を投げ飛ばした！")
+                mon_hp -= 70
+                effect()
+
+            elif (key[pg.K_9]):
+                util.write_text("わたしばし 攻撃！")
+                util.write_text("わりばしは 爆弾を渡した")
+                util.write_text("大爆発！！！")
+                mon_hp -= 200
+                for i in range(5):
+                    x_offset = random.randint(-20, 20)
+                    util.disp_battle_chr(mon, 0, x_offset)
+                    pg.time.Clock().tick(10)
+                    pg.display.update()
+
+        #この技は命中率5%～10%想定
+            elif (key[pg.K_0]):
+                util.write_text("ちぎりばし 攻撃！")
+                util.write_text("わりばしは 相手を引き千切った！")
+                util.write_text("必殺ダメージ！")
+                mon_hp -= mon_hp
+                for i in range(5):
+                    x_offset = random.randint(-3, 3)
+                    util.disp_battle_chr(mon, 0, x_offset)
+                    pg.time.Clock().tick(10)
+                    pg.display.update()
+                    
+        if (key[pg.K_DOWN]):
+            break
+            magic_flag = False
+
 def item():
     util.write_text("アイテムを 選べ")
     util.write_text(" ")
@@ -151,8 +287,6 @@ def item():
     util.write_status("7", a+6)
     util.write_status("8", a+7)
     util.write_status("0 閉じる", a+8)
-
-
 
 #逃げる
 def nigeru():
@@ -187,7 +321,10 @@ def battle_main():
             battle_fight()
         elif (key[pg.K_2]):
             # まほう
-            util.write_text("まほうはまだつくってない！")
+            magic_flag = True
+            while True:
+                magic()
+            magic_flag = False
         elif (key[pg.K_3]):
             # アイテム
             item()

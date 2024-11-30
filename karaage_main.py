@@ -116,7 +116,7 @@ def field_main():
         # event = data.fd_obj_db[data.fd_map[data.my_y][data.my_x]]['event']
         event = data.fd_obj_db[map[data.my_y][data.my_x]]['event']
         if (event != None):
-            # 敵とのエンカウント
+            # 敵とのエンカウント2
             if (event == data.ENCOUNT1):
                 battle.encount1()
 
