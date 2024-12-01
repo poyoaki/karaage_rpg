@@ -164,6 +164,14 @@ def battle_fight():
         util.write_text(battle_txt)
         util.write_text(" ")
 
+def magic_atosyori():
+    global magic_mode
+    magic_mode = False
+    util.clear_status_box()
+    util.write_text(" ")
+    util.write_text(battle_txt)
+    util.write_text(" ")
+
 def magic_write():
     m = 0
     util.clear_status_box()
@@ -179,91 +187,47 @@ def magic_write():
 
 
 def magic():
-    global magic_mode,magic_writed
-    m = 0
-    """
-    if magic_writed:
-        util.clear_status_box()
-        util.write_status("A おがみばし", m+0)
-        util.write_status("S かきばし", m+1)
-        util.write_status("D すかしばし", m+2)
-        util.write_status("F たたきばし", m+3)
-        util.write_status("G にぎりばし", m+4)
-        util.write_status("H ふりばし", m+5)
-        util.write_status("J まよいばし", m+6)
-        util.write_status("K さしばし", m+7)
-        util.write_status("L 戻る", m+8)
-        """
-
-
+    global magic_mode
     #無限に打てるのはバランスが崩壊するのでMP('m'ajic cho'p'sticks)制を導入予定
     #さしばしは強すぎるのでレベルアップによるMP増加では届かないMP消費量にし、特殊ルートでの使用解禁を想定
     if magic_mode:         
         keys = pg.key.get_pressed()
         if (keys[pg.K_a]):
-            util.write_text("おがみばし!")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
-
+            util.write_text("おがみばし! 攻撃")
+            magic_atosyori()
+            
         elif (keys[pg.K_s]):
             util.write_text("かきばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_d]):
             util.write_text("すかしばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_f]):
             util.write_text("たたきばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_g]):
             util.write_text("にぎりばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_h]):
             util.write_text("ふりばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_j]):
             util.write_text("まよいばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
 
         elif (keys[pg.K_k]):
             util.write_text("さしばし 攻撃！")
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            magic_atosyori()
 
         elif (keys[pg.K_l]):
-            util.write_text("")
-            util.clear_text()
-            magic_mode =False
-            util.write_text(" ")
-            util.write_text(battle_txt)
-            util.write_text(" ")
+            util.write_text("では どうする？")
+            magic_atosyori()
 
 def item():
     key = pg.key.get_pressed()
