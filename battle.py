@@ -127,10 +127,14 @@ def battle_fight():
         battle_win()
         return
     
+    enemy_turn()
+    
+def enemy_turn():
     # wait
     for i in range(10):
         pg.time.Clock().tick(10)
 
+    global ransuu
     util.write_text(mon_name+"の攻撃")
     hit = False
     d20 = random.randrange(1,20)
@@ -163,6 +167,15 @@ def battle_fight():
     else:
         util.write_text(battle_txt)
         util.write_text(" ")
+        battle_atosyori()
+
+#後処理系
+def battle_atosyori():
+    global battle_mode
+    battle_mode = False
+    util.write_text(" ")
+    util.write_text(battle_txt)
+    util.write_text(" ")
 
 def magic_atosyori():
     global magic_mode
@@ -172,6 +185,20 @@ def magic_atosyori():
     util.write_text(battle_txt)
     util.write_text(" ")
 
+def item_atosyori():
+    global item_mode
+    item_mode = False
+    util.clear_status_box()
+    util.write_text(" ")
+    util.write_text(battle_txt)
+    util.write_text(" ")
+
+def run_away_atosyori():
+    global run_away_mode
+    run_away_mode = False
+
+
+#魔法記述
 def magic_write():
     m = 0
     util.clear_status_box()
@@ -185,52 +212,92 @@ def magic_write():
     util.write_status("K さしばし", m+7)
     util.write_status("L 戻る", m+8)
 
-
+#魔法
 def magic():
     global magic_mode
     #無限に打てるのはバランスが崩壊するのでMP('m'ajic cho'p'sticks)制を導入予定
     #さしばしは強すぎるのでレベルアップによるMP増加では届かないMP消費量にし、特殊ルートでの使用解禁を想定
     if magic_mode:         
         keys = pg.key.get_pressed()
+
+        #4ターンの間 攻撃力と防御力を上げる
         if (keys[pg.K_a]):
-            util.write_text("おがみばし! 攻撃")
+            util.write_text("いただきます 攻撃")
             magic_atosyori()
             
+        #神に祈り効果を授かる(3パターン)
         elif (keys[pg.K_s]):
-            util.write_text("かきばし 攻撃！")
+            util.write_text("おがみばし 攻撃！")
             magic_atosyori()
 
+        #そのターン先行を取っていればダメージを受けない
         elif (keys[pg.K_d]):
             util.write_text("すかしばし 攻撃！")
             magic_atosyori()
 
+        #連続攻撃
         elif (keys[pg.K_f]):
-            util.write_text("たたきばし 攻撃！")
+            util.write_text("かきばし 攻撃！")
             magic_atosyori()
 
+        #相手の攻撃力と防御力を下げる
         elif (keys[pg.K_g]):
             util.write_text("にぎりばし 攻撃！")
             magic_atosyori()
 
+        #自分と味方のHPを回復する
         elif (keys[pg.K_h]):
-            util.write_text("ふりばし 攻撃！")
+            util.write_text("おかわり 攻撃")
             magic_atosyori()
 
+        #相手の攻撃を2ターン防げる
         elif (keys[pg.K_j]):
             util.write_text("まよいばし 攻撃！")
             magic_atosyori()
 
-
+        #確率で一撃必殺
         elif (keys[pg.K_k]):
-            util.write_text("さしばし 攻撃！")
+            util.write_text("ごちそうさまでした 攻撃")
             magic_atosyori()
 
         elif (keys[pg.K_l]):
             util.write_text("では どうする？")
             magic_atosyori()
-
+ 
+#アイテム
 def item():
     key = pg.key.get_pressed()
+    #アイテムとしての機能は「item_atosyori」の手前に書く
+    if (key[pg.K_q]):
+        item_atosyori()
+
+    elif (key[pg.K_w]):
+        item_atosyori()
+
+    elif (key[pg.K_e]):
+        item_atosyori()
+
+    elif (key[pg.K_r]):
+        item_atosyori()
+
+    elif (key[pg.K_t]):
+        item_atosyori()
+
+    elif (key[pg.K_y]):
+        item_atosyori()
+
+    elif (key[pg.K_u]):
+        item_atosyori()
+
+    elif (key[pg.K_i]):
+        item_atosyori()
+
+    elif (key[pg.K_o]):
+        util.write_text("ならば、どうする？")
+        item_atosyori()
+    
+#アイテム記述
+def item_write():
     util.write_text("アイテムを 選べ")
     util.write_text(" ")
     a = 0
@@ -244,10 +311,10 @@ def item():
     util.write_status("U", a+6)
     util.write_status("I", a+7)
     util.write_status("O 閉じる", a+8)
-    if (key[pg.K_o]):
-         pass
+
 #逃げる
-def nigeru():
+def run_away():
+    global battle_end
     nigeru_count = random.randint(0, 100)
     if (nigeru_count > 20):
         util.write_text(" ")
@@ -257,14 +324,22 @@ def nigeru():
             pg.time.Clock().tick(10)
         util.clear_text()
         util.back_to_field()
+        run_away_atosyori()
+        
     else:
         util.write_text("逃げ切ることは できなかった")
         util.write_text(" ")
+        util.write_text(battle_txt)
+        run_away_atosyori()
 
 magic_mode = False
+battle_mode = False
+item_mode = False
+run_away_mode = False
+
 # 戦闘画面のメインルーチン
 def battle_main():
-    global battle_end, magic_mode
+    global battle_end, magic_mode,battle_mode,item_mode,run_away_mode
     key = pg.key.get_pressed()
 
     if (battle_end == True):
@@ -273,22 +348,27 @@ def battle_main():
             # フィールド画面に戻る
             util.back_to_field()
     elif magic_mode:
+        #魔法
         magic()
+    elif item_mode:
+        #アイテム
+        item()
+    elif run_away_mode:
+        #逃げる
+        run_away()
     else:
         if (key[pg.K_1]):
             # たたかう
+            battle_mode = True
             battle_fight()
         elif (key[pg.K_2]):
-            # まほう
             magic_write()
             magic_mode = True
-            magic()
         elif (key[pg.K_3]):
-            # アイテム
-            item()
+            item_write()
+            item_mode = True
         elif (key[pg.K_4]):
-            # にげる
-            nigeru()
+            run_away_mode = True
 
 
 def encount1():
