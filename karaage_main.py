@@ -5,6 +5,7 @@ import battle
 import shop
 import talk
 import status
+import title
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
