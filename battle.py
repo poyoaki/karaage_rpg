@@ -2,8 +2,9 @@
 import data
 import util
 
-
 battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
+
+
 
 """
 バトルのルール（仮）
@@ -12,6 +13,7 @@ battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
 ダメージ計算は武器や敵の属性により変わる。
 dmg_mul*randrange(dmg_roll)のダメージを相手のHPから引く。
 """
+
 
 # 敵のパラメーターコピー用（複数の敵にするときはリストにする）
 mon = 0
@@ -519,13 +521,16 @@ def battle_main():
 def encount1():
     # 確率で敵と遭遇させる
     rnd = random.randint(0, 100)
-    if (rnd < 10): #10%
+<<<<<<< Updated upstream
+    if (rnd < 0): #10%
+=======
+    if (rnd < 5): # 敵の出現確率%
+>>>>>>> Stashed changes
         # どの敵が出たか決める
         # 初期位置から離れるほど強い敵を出す？
         enemy = random.randint(0, data.monster_num-1)
         
         battle_start(enemy)
-
 
 def level_up_check():
     print("level up mada dekitenai")
