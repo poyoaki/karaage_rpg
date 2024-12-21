@@ -5,6 +5,7 @@ import battle
 import shop
 import talk
 import status
+import title
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
@@ -33,6 +34,8 @@ def main():
             battle.battle_main()
         elif (data.screen_sw == 3):
             shop.shop_main()
+        elif (data.screen_sw == 4):
+            title.title_main()
         elif (data.screen_sw == 5):
             talk.talk_main()
         pg.display.update()

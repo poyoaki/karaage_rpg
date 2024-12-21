@@ -32,10 +32,11 @@ waribashi_img = pg.image.load(dpath+"waribashi.png")
 karaageya_img = pg.image.load(dpath+"karaageya.png")
 kabe_img = pg.image.load(dpath+"kabe.png")
 fork_img = pg.image.load(dpath+"fork.png")
+title_img = pg.image.load(dpath+"karaage_title.png")
 
 
 # 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
-screen_sw = 0
+screen_sw = 4
 
 # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
 map_disp_size_x = 21
