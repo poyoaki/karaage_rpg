@@ -126,14 +126,13 @@ now_field = 0
 # フィールドを追加したらここに追加していく
 field_db = [fd_map, city1_map]
 
-
 """
 マイキャラ
 0 わりばし
 以下
 """
 my_chr_db = [
-    {'num': 0, 'name':"わりばし", 'ini_hp':20, 'img':waribashi_img},
+    {'num': 0, 'name':"わりばし", 'ini_hp':20, 'img':waribashi_img}
 ]
 
 my_chr = 0
@@ -149,6 +148,7 @@ exp:経験値
 プレイヤーに与えるダメージはdmg_mul*乱数（1～dmg_roll)となる
 防具の堅さは未実装
 クリティカルヒットも未実装
+a 攻撃
 """
 
 # 敵の画像
@@ -157,8 +157,8 @@ gob_img = pg.image.load(dpath+"goblin.png")
 
 monster_num = 2
 monster_db = [
-    {'name':"なんか青い", 'hp':4, 'ac':19, 'dex':1, 'dmg_mul':1, 'dmg_roll':2, 'exp':10, 'money':30, 'img':slime_img},
-    {'name':"なんか緑", 'hp':8, 'ac':18, 'dex':1, 'dmg_mul':1, 'dmg_roll':4, 'exp':15, 'money':60, 'img':gob_img},
+    {'name':"なんか青い", 'hp':4, 'ac':19, 'dex':1, 'dmg_mul':1, 'dmg_roll':2, 'exp':10, 'money':30, 'img':slime_img, 'a':10},
+    {'name':"なんか緑", 'hp':8, 'ac':18, 'dex':1, 'dmg_mul':1, 'dmg_roll':4, 'exp':15, 'money':60, 'img':gob_img, 'a':15},
 ]
 
 buki_db = [
@@ -180,6 +180,12 @@ HEAL2 = 11
 HEAL3 = 12
 
 item_db = [
+    {'num':0, 'name':"からあげ（小）", 'price':100, 'func': HEAL1},
+    {'num':1, 'name':"からあげ（中）", 'price':150, 'func': HEAL2},
+    {'num':2, 'name':"からあげ串（でかい）", 'price':400, 'func': HEAL3},
+]
+
+maho_db = [
     {'num':0, 'name':"からあげ（小）", 'price':100, 'func': HEAL1},
     {'num':1, 'name':"からあげ（中）", 'price':150, 'func': HEAL2},
     {'num':2, 'name':"からあげ串（でかい）", 'price':400, 'func': HEAL3},
@@ -209,6 +215,34 @@ my_dmg_mul = buki_db[0]['dmg_mul']
 my_dmg_roll = buki_db[0]['dmg_roll']
 my_chr_name = my_chr_db[my_chr]['name']
 my_item_list = []
+
+
+my_protect = 5
+my_dex = 5 
+my_attack = 10
+
+"""
+敵キャラの設定 ウィザードリィ風
+hp:耐久力
+ac:アーマークラス 大きいほどプレイヤーの攻撃が当たりやすいので弱い。最大20最小1
+dex:すばやさ 大きいほどすばやい。逃げやすく攻撃も当たりやすい
+dmg_mul ダメージ倍率
+dmg_roll ダメージの乱数範囲
+exp:経験値
+プレイヤーに与えるダメージはdmg_mul*乱数（1～dmg_roll)となる
+防具の堅さは未実装
+クリティカルヒットも未実装
+"""
+
+my_sutetasu = {
+    'HP':my_hp,
+    'MP':my_mp,
+    '強度':my_attack,
+    '硬度':my_protect,
+    '軽さ':my_dex,
+    '経験値':my_exp,
+    'お金':my_money,
+}
 
 #自分がいる場所（map上）
 my_x = 4

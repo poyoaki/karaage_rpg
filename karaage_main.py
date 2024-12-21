@@ -3,26 +3,20 @@ import util
 import data
 import battle
 import shop
-import talk
-import status
-import title
+
+
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
 pg.init()
-screen_x,screen_y=-1,-1
-desktop_sizes=pg.display.get_desktop_sizes()
-# フルHDでテスト-> desktop_sizes=[(1920,1080)]
-# 　　HDでテスト-> desktop_sizes=[(1280,720)]
-is_desktop_FullHD=desktop_sizes[0][0] >= 1920 and desktop_sizes[0][1] >= 1080
-if is_desktop_FullHD:
-    screen_x, screen_y = 1920,1080
-else:
-    screen_x, screen_y = 1280,720
+
+screen_x = 1920
+screen_y = 1080
 #screen = pg.display.set_mode((screen_x, screen_y),pg.FULLSCREEN)
 screen = pg.display.set_mode((screen_x, screen_y))
 
 pg.display.set_caption("からあげ(仮)")
+
 
 def main():
     
@@ -34,10 +28,7 @@ def main():
             battle.battle_main()
         elif (data.screen_sw == 3):
             shop.shop_main()
-        elif (data.screen_sw == 4):
-            title.title_main()
-        elif (data.screen_sw == 5):
-            talk.talk_main()
+
         pg.display.update()
         #pg.time.Clock().tick(60)
         pg.time.Clock().tick(10)
@@ -84,30 +75,25 @@ def update_field():
     for i in range(0, data.map_disp_size_x, 1):
         for j in range(0, data.map_disp_size_y, 1):
             image=data.fd_obj_db[map[dispy+j][dispx+i]]['img']
-            # screen.blit(image, (16+i*90, 40+j*90))
-            screen.blit(image, (i*90, j*90))
+            screen.blit(image, (16+i*90, 40+j*90))
     #自分を描画
-    # screen.blit(data.my_chr_db[data.my_chr]['img'], (16+(data.my_x-dispx)*90, 40+(data.my_y-dispy)*90))
-    screen.blit(data.my_chr_db[data.my_chr]['img'], ((data.my_x-dispx)*90, (data.my_y-dispy)*90))
+    screen.blit(data.my_chr_db[data.my_chr]['img'], (16+(data.my_x-dispx)*90, 40+(data.my_y-dispy)*90))
 
     pg.display.update()
 
 my_x_bak=0
 my_y_bak=0
 
+moved_mode = True
 # フィールド画面のメインルーチン
 def field_main():
-    global my_x_bak, my_y_bak
+    global my_x_bak, my_y_bak, moved_mode
     #マップのロード
     map = data.field_db[data.now_field]
-    pg.event.pump()
+
     moved = False
     key = pg.key.get_pressed()
 
-    # ステータス表示中は画面アップデートせず、キースキャンもENTER以外は停止
-    if (status.status_mode != 0):
-        status.status_main()
-        return
     
     if (key[pg.K_RIGHT]):
         if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
@@ -126,7 +112,7 @@ def field_main():
             data.my_y += 1
             moved = True
     if (key[pg.K_RETURN]):
-        status.status_start()
+        #status.status_start()
         return
 
     update_field()    
@@ -136,9 +122,10 @@ def field_main():
         # event = data.fd_obj_db[data.fd_map[data.my_y][data.my_x]]['event']
         event = data.fd_obj_db[map[data.my_y][data.my_x]]['event']
         if (event != None):
-            # 敵とのエンカウント
+            # 敵とのエンカウント2
             if (event == data.ENCOUNT1):
                 battle.encount1()
+
             if (event == data.ENCOUNT2):
                 # 敵の遭遇率を上げるなど?
                 pass
@@ -167,9 +154,6 @@ def field_main():
                 shop.shop_start(0)
                 util.switch_to_shop()
 
-            if (event == data.RIVAL):
-                talk.talk_start()
-                util.switch_to_talk()
 
 def encount1():
     pass
@@ -177,4 +161,3 @@ def encount1():
 
 if __name__ == "__main__":
     main()
-#mete0r527
