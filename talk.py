@@ -108,7 +108,7 @@ def talk_main():
     elif t9 == True and tesc == False:
         if (key[pg.K_SPACE] or key[pg.K_RETURN]):
             util.write_text("おっと、少し喋りすぎたようだね。それじゃあ、サヨウナラ")
-            util.write_text("(Escキーを押して会話を終了させましょう)")
+            util.write_text("(Escキーを押して会話を終了させて、町に行ってみましょう)")
             tesc=True
 
     elif (key[pg.K_ESCAPE]):
@@ -130,6 +130,3 @@ def talk_main():
         tesc=False
 
         data.fd_map[10][12] = 0
-
-#町に行ってみましょう
-
