@@ -1,0 +1,5 @@
+from playsound import playsound
+
+open ('souzai.happyou.mp3')
+
+playsound('souzai.happyou.mp3')
