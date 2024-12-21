@@ -5,6 +5,7 @@ import battle
 import shop
 
 
+
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
 pg.init()
@@ -83,15 +84,17 @@ def update_field():
 my_x_bak=0
 my_y_bak=0
 
+moved_mode = True
 # フィールド画面のメインルーチン
 def field_main():
-    global my_x_bak, my_y_bak
+    global my_x_bak, my_y_bak, moved_mode
     #マップのロード
     map = data.field_db[data.now_field]
 
     moved = False
     key = pg.key.get_pressed()
 
+    
     if (key[pg.K_RIGHT]):
         if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
             data.my_x += 1
@@ -108,6 +111,9 @@ def field_main():
         if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
             data.my_y += 1
             moved = True
+    if (key[pg.K_RETURN]):
+        #status.status_start()
+        return
 
     update_field()    
 
