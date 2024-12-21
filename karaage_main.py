@@ -4,6 +4,7 @@ import data
 import battle
 import shop
 import talk
+import status
 
 # 画像などは同じフォルダに置く
 dpath = os.path.dirname(__file__)+"/"
@@ -101,6 +102,11 @@ def field_main():
     moved = False
     key = pg.key.get_pressed()
 
+    # ステータス表示中は画面アップデートせず、キースキャンもENTER以外は停止
+    if (status.status_mode != 0):
+        status.status_main()
+        return
+    
     if (key[pg.K_RIGHT]):
         if (data.fd_obj_db[map[data.my_y][data.my_x+1]]['walk']):
             data.my_x += 1
@@ -117,6 +123,10 @@ def field_main():
         if (data.fd_obj_db[map[data.my_y+1][data.my_x]]['walk']):
             data.my_y += 1
             moved = True
+    if (key[pg.K_RETURN]):
+        status.status_start()
+        return
+
     update_field()    
 
     # 移動先の場所に応じてイベントを実行する
@@ -127,7 +137,6 @@ def field_main():
             # 敵とのエンカウント
             if (event == data.ENCOUNT1):
                 battle.encount1()
-
             if (event == data.ENCOUNT2):
                 # 敵の遭遇率を上げるなど?
                 pass

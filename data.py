@@ -194,8 +194,11 @@ shop_db = [
 
 # 自分のステータス
 # セーブロードを実装したら、ここの値を更新すると良い
+my_level = 1
 my_hp = 30
+my_hp_max = 30
 my_mp = 10
+my_mp_max = 10
 my_exp = 0
 my_money = 1000
 my_buki_name = buki_db[0]['name']
@@ -217,7 +220,26 @@ def my_item_append(item):
     else:
         my_item_list.append(item)
         return 0
-    
+
+# n番目のアイテム番号を取得する
+def get_my_item(num):
+    global my_item_list
+    print("get_my_item :%d / %d" %(num, len(my_item_list)))
+    if (len(my_item_list) <= num):
+        return -1
+    else:
+        return my_item_list[num]
+
+def get_my_item_name(num):
+    global my_item_list
+    print("item req:%d" %(num))
+    if (len(my_item_list) <= num):
+        return ""
+    else:
+        print(my_item_list)
+        print(my_item_list[0])
+        return my_item_list[num]['name']
+
 #こんにちわ
 #テストです
 #あー
