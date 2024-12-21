@@ -521,8 +521,7 @@ def battle_main():
 def encount1():
     # 確率で敵と遭遇させる
     rnd = random.randint(0, 100)
-    if (rnd < 5): #10%
-
+    if (rnd < 5): #5%
         # どの敵が出たか決める
         # 初期位置から離れるほど強い敵を出す？
         enemy = random.randint(0, data.monster_num-1)
