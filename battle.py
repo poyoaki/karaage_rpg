@@ -3,8 +3,10 @@
 import data
 import util
 
-
 battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
+pose = False
+
+
 
 """
 バトルのルール（仮）
@@ -13,6 +15,7 @@ battle_txt = "[1]たたかう [2]まほう [3]アイテム [4]にげる"
 ダメージ計算は武器や敵の属性により変わる。
 dmg_mul*randrange(dmg_roll)のダメージを相手のHPから引く。
 """
+
 
 # 敵のパラメーターコピー用（複数の敵にするときはリストにする）
 mon = 0
@@ -40,7 +43,9 @@ def battle_start(monster):
     battle_end = False
     util.battle_start_effect()
     util.write_text("%sが あらわれた！" %(mon_name))
+    util.write_text(" ")
     util.write_text(battle_txt)
+    util.write_text(" ")
     util.disp_battle_chr(mon, 0, 0)
     util.disp_status()
     util.switch_to_battle()
@@ -64,6 +69,7 @@ def battle_lose():
     global battle_end
     util.write_text("戦いに まけてしまった!")
     util.write_text("死ぬ処理まだつくってない")
+    util.write_text(" ")
     util.wait_for_spc_key()
     battle_end = True
     
@@ -89,8 +95,10 @@ def battle_fight():
             pg.time.Clock().tick(10)
             pg.display.update()
         util.write_text("%dのダメージをあたえた" %(damage))
+        util.write_text(" ")
     else:
         util.write_text("しかし あたらなかった")
+        util.write_text(" ")
 
     mon_hp -= damage
     if mon_hp <= 0:
@@ -119,14 +127,50 @@ def battle_fight():
             pg.display.update()
 
         util.write_text("%dのダメージ!" %(damage))
+        util.write_text(" ")
     else:
         util.write_text("しかし あたらなかった")
+        util.write_text(" ")
 
     data.my_hp -= damage
     if data.my_hp < 0:
         battle_lose()
     else:
         util.write_text(battle_txt)
+        util.write_text(" ")
+
+def item():
+    util.write_text("アイテムを 選べ")
+    util.write_text(" ")
+    a = 0
+    util.clear_status_box()
+    util.write_status("1", a+0)
+    util.write_status("2", a+1)
+    util.write_status("3", a+2)
+    util.write_status("4", a+3)
+    util.write_status("5", a+4)
+    util.write_status("6", a+5)
+    util.write_status("7", a+6)
+    util.write_status("8", a+7)
+    util.write_status("0 閉じる", a+8)
+
+
+
+#逃げる
+def nigeru():
+    nigeru_count = random.randint(0, 100)
+    if (nigeru_count > 20):
+        util.write_text(" ")
+        util.write_text("逃げ切ることが できた")
+        battle_end = True
+        for i in range(10):
+            pg.time.Clock().tick(10)
+        util.clear_text()
+        util.back_to_field()
+    else:
+        util.write_text("逃げ切ることは できなかった")
+        util.write_text(" ")
+
 
 # 戦闘画面のメインルーチン
 def battle_main():
@@ -138,6 +182,7 @@ def battle_main():
             util.clear_text()
             # フィールド画面に戻る
             util.back_to_field()
+
     else:
         if (key[pg.K_1]):
             # たたかう
@@ -147,22 +192,25 @@ def battle_main():
             util.write_text("まほうはまだつくってない！")
         elif (key[pg.K_3]):
             # アイテム
-            util.write_text("アイテムはまだつくってない！")
+            item()
         elif (key[pg.K_4]):
             # にげる
-            util.write_text("にげるはまだつくってない！")
+            nigeru()
 
 
 def encount1():
     # 確率で敵と遭遇させる
     rnd = random.randint(0, 100)
-    if (rnd < 10): #10%
+<<<<<<< Updated upstream
+    if (rnd < 0): #10%
+=======
+    if (rnd < 5): # 敵の出現確率%
+>>>>>>> Stashed changes
         # どの敵が出たか決める
         # 初期位置から離れるほど強い敵を出す？
         enemy = random.randint(0, data.monster_num-1)
         
         battle_start(enemy)
-
 
 def level_up_check():
     print("level up mada dekitenai")
