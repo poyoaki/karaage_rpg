@@ -22,16 +22,17 @@ dpath = os.path.dirname(__file__)+"/"
 
 
 # フィールド上の画像のロードを行う
-sougen_img = pg.image.load(dpath+"sougen.png")
-yama_img = pg.image.load(dpath+"yama.png")
-umi_img = pg.image.load(dpath+"umi.png")
-machi_img = pg.image.load(dpath+"machi.png")
-iwayama_img = pg.image.load(dpath+"iwayama.png")
-mori_img = pg.image.load(dpath+"mori.png")
-waribashi_img = pg.image.load(dpath+"waribashi.png")
-karaageya_img = pg.image.load(dpath+"karaageya.png")
-kabe_img = pg.image.load(dpath+"kabe.png")
-fork_img = pg.image.load(dpath+"fork.png")
+field_path=dpath+"img/field/"
+sougen_img = pg.image.load(field_path+"sougen.png")
+yama_img = pg.image.load(field_path+"yama.png")
+umi_img = pg.image.load(field_path+"umi.png")
+machi_img = pg.image.load(field_path+"machi.png")
+iwayama_img = pg.image.load(field_path+"iwayama.png")
+mori_img = pg.image.load(field_path+"mori.png")
+waribashi_img = pg.image.load(field_path+"waribashi.png")
+karaageya_img = pg.image.load(field_path+"karaageya.png")
+kabe_img = pg.image.load(field_path+"kabe.png")
+fork_img = pg.image.load(field_path+"fork.png")
 
 
 
