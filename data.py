@@ -21,26 +21,28 @@ dpath = os.path.dirname(__file__)+"/"
 
 
 
-# 画像のロードを行う
-sougen_img = pg.image.load(dpath+"sougen.png")
-yama_img = pg.image.load(dpath+"yama.png")
-umi_img = pg.image.load(dpath+"umi.png")
-machi_img = pg.image.load(dpath+"machi.png")
-iwayama_img = pg.image.load(dpath+"iwayama.png")
-mori_img = pg.image.load(dpath+"mori.png")
-waribashi_img = pg.image.load(dpath+"waribashi.png")
-karaageya_img = pg.image.load(dpath+"karaageya.png")
-kabe_img = pg.image.load(dpath+"kabe.png")
-fork_img = pg.image.load(dpath+"fork.png")
-title_img = pg.image.load(dpath+"karaage_title.png")
+
+# フィールド上の画像のロードを行う
+field_path=dpath+"img/field/"
+sougen_img = pg.image.load(field_path+"sougen.png")
+yama_img = pg.image.load(field_path+"yama.png")
+umi_img = pg.image.load(field_path+"umi.png")
+machi_img = pg.image.load(field_path+"machi.png")
+iwayama_img = pg.image.load(field_path+"iwayama.png")
+mori_img = pg.image.load(field_path+"mori.png")
+waribashi_img = pg.image.load(field_path+"waribashi.png")
+karaageya_img = pg.image.load(field_path+"karaageya.png")
+kabe_img = pg.image.load(field_path+"kabe.png")
+fork_img = pg.image.load(field_path+"fork.png")
+
 
 
 # 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
 screen_sw = 4
 
 # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
-map_disp_size_x = 21
-map_disp_size_y = 11
+# map_disp_size_x = 21
+# map_disp_size_y = 11
 
 # フィールドのイベント
 # Noneだとなにもなし(敵も出ない)
@@ -126,6 +128,8 @@ now_field = 0
 # フィールドを追加したらここに追加していく
 field_db = [fd_map, city1_map]
 
+#タイトル画像のインポート
+title_img = pg.image.load(dpath+"karaage_title.png")
 
 """
 マイキャラ
