@@ -39,8 +39,8 @@ fork_img = pg.image.load(dpath+"fork.png")
 screen_sw = 4
 
 # 表示されるフィールドは21ｘ11のます（90x90の画像をならべる）
-map_disp_size_x = 21
-map_disp_size_y = 11
+# map_disp_size_x = 21
+# map_disp_size_y = 11
 
 # フィールドのイベント
 # Noneだとなにもなし(敵も出ない)
