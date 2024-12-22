@@ -21,7 +21,7 @@ dpath = os.path.dirname(__file__)+"/"
 
 
 
-# 画像のロードを行う
+# フィールド上の画像のロードを行う
 sougen_img = pg.image.load(dpath+"sougen.png")
 yama_img = pg.image.load(dpath+"yama.png")
 umi_img = pg.image.load(dpath+"umi.png")
@@ -32,7 +32,7 @@ waribashi_img = pg.image.load(dpath+"waribashi.png")
 karaageya_img = pg.image.load(dpath+"karaageya.png")
 kabe_img = pg.image.load(dpath+"kabe.png")
 fork_img = pg.image.load(dpath+"fork.png")
-title_img = pg.image.load(dpath+"karaage_title.png")
+
 
 
 # 画面切り替え 0=field, 1=battle, 2=status, 3=からあげや, 4=title, 5=talk
@@ -126,6 +126,8 @@ now_field = 0
 # フィールドを追加したらここに追加していく
 field_db = [fd_map, city1_map]
 
+#タイトル画像のインポート
+title_img = pg.image.load(dpath+"karaage_title.png")
 
 """
 マイキャラ
