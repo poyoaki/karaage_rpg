@@ -21,6 +21,7 @@ dpath = os.path.dirname(__file__)+"/"
 
 
 
+
 # フィールド上の画像のロードを行う
 field_path=dpath+"img/field/"
 sougen_img = pg.image.load(field_path+"sougen.png")
