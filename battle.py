@@ -227,6 +227,7 @@ def magic():
     #無限に打てるのはバランスが崩壊するのでMP('m'ajic cho'p'sticks)制を導入予定
     #さしばしは強すぎるのでレベルアップによるMP増加では届かないMP消費量にし、特殊ルートでの使用解禁を想定
     if magic_mode:         
+        pg.event.pump()
         keys = pg.key.get_pressed()
 
         #4ターンの間 攻撃力と防御力を上げる
@@ -328,7 +329,8 @@ defense_mode = False
 
 def magic():
     global magic_mode , attack_mode , defense_mode ,meat
-    if magic_mode:         
+    if magic_mode:     
+        pg.event.pump()    
         keys = pg.key.get_pressed()
 
         #さぐりばし
@@ -394,6 +396,7 @@ def magic():
  
 #アイテム
 def item():
+    pg.event.pump()
     key = pg.key.get_pressed()
     #アイテムとしての機能は「item_atosyori」の手前に書く
     if (key[pg.K_q]):
@@ -470,7 +473,9 @@ run_away_mode = False
 # 戦闘画面のメインルーチン
 def battle_main():
     global battle_end, magic_mode,battle_mode,item_mode,run_away_mode
+    pg.event.pump()
     key = pg.key.get_pressed()
+    pg.event.clear()
 
     if (battle_end == True):
         if (key[pg.K_SPACE] or key[pg.K_RETURN]):

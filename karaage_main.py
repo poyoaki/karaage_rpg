@@ -11,7 +11,8 @@ import title
 dpath = os.path.dirname(__file__)+"/"
 pg.init()
 screen_x,screen_y=-1,-1
-desktop_sizes=pg.display.get_desktop_sizes()
+desktop_sizes=[(1280,720)]
+# desktop_sizes=pg.display.get_desktop_sizes()
 # フルHDでテスト-> desktop_sizes=[(1920,1080)]
 # 　　HDでテスト-> desktop_sizes=[(1280,720)]
 is_desktop_FullHD=desktop_sizes[0][0] >= 1920 and desktop_sizes[0][1] >= 1080

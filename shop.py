@@ -70,6 +70,7 @@ def shop_exit():
 # 店のメインルーチン
 def shop_main():
     global shop_mode, buy_item, buy_max
+    pg.event.pump()
     key = pg.key.get_pressed()
 
     if (shop_mode == 1):
