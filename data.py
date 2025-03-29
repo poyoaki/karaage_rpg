@@ -129,7 +129,7 @@ now_field = 0
 field_db = [fd_map, city1_map]
 
 #タイトル画像のインポート
-title_img = pg.image.load(dpath+"karaage_title.png")
+title_img = pg.image.load(dpath+"img/util/karaage_title.png")
 
 """
 マイキャラ
@@ -156,8 +156,8 @@ exp:経験値
 """
 
 # 敵の画像
-slime_img = pg.image.load(dpath+"slime.png")
-gob_img = pg.image.load(dpath+"goblin.png")
+slime_img = pg.image.load(dpath+"img/enemy/slime.png")
+gob_img = pg.image.load(dpath+"img/enemy/goblin.png")
 
 monster_num = 2
 monster_db = [
@@ -176,7 +176,7 @@ bougu_db = [
 ]
 
 # 店員の画像
-tenin1_img = pg.image.load(dpath+"slime.png")
+tenin1_img = pg.image.load(dpath+"img/enemy/slime.png")
 
 # アイテム一覧
 HEAL1 = 10

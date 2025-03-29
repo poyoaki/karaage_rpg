@@ -32,9 +32,9 @@ def title_main():
         ("3 設定",     0.8)
     )
     #フォント
-    titlefont=     pg.font.Font(dpath+"ipaexg.ttf",200)
-    menufont =     pg.font.Font(dpath+"ipaexg.ttf", 100)
-    menufont_bold =pg.font.Font(dpath+"ipaexg.ttf", 100)
+    titlefont=     pg.font.Font(dpath+"font/ipaexg.ttf",200)
+    menufont =     pg.font.Font(dpath+"font/ipaexg.ttf", 100)
+    menufont_bold =pg.font.Font(dpath+"font/ipaexg.ttf", 100)
     menufont_bold.set_bold(True)
     screen=karaage_main.screen
     screen_x, screen_y = karaage_main.screen_x, karaage_main.screen_y

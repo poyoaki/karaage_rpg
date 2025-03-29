@@ -93,7 +93,7 @@ def clear_text():
 # 1行をテキスト欄に書く
 def write_text(txt):
     global txt_line, txt_buf
-    font = pg.font.Font(dpath+"ipaexg.ttf", txt_letter_size)
+    font = pg.font.Font(dpath+"font/ipaexg.ttf", txt_letter_size)
     if (txt_line <= 5):
         txt_buf[txt_line] = txt
         txt_line += 1
@@ -111,7 +111,7 @@ def write_text(txt):
 # テキスト欄の再描画（微妙な位置ずらしつき）
 def update_write(x_offset, y_offset):
     global txt_line, txt_buf
-    font = pg.font.Font(dpath+"ipaexg.ttf", txt_letter_size)
+    font = pg.font.Font(dpath+"font/ipaexg.ttf", txt_letter_size)
     clear_text_box(x_offset, y_offset)
     for i in range(0, 6):
         if len(txt_buf[i]) > 0:
@@ -130,7 +130,7 @@ def write_status(txt, line):
     if (line > 8):
         print("write_status line err %d" % (line))
         return
-    font = pg.font.Font(dpath+"ipaexg.ttf", status_letter_size)
+    font = pg.font.Font(dpath+"font/ipaexg.ttf", status_letter_size)
     text = font.render(txt, True, pg.Color("white"))
     karaage_main.screen.blit(text, (status_box_left+5, status_box_top+status_padding_y+status_letter_size*line))
     pg.display.update()
